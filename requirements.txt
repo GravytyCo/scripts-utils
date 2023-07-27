@@ -1,2 +1,4 @@
+boto3==1.28.12
+setuptools==62.0.0
 gravlibs-keys==0.0.3
-python-dotenv==0.13.0
+python-dotenv==1.0.0

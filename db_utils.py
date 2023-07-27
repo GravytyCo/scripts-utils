@@ -9,7 +9,7 @@ def dump_prod_db():
     our DEV enviorment. The DEV environment can download the dump when needed and use it to restore the
     DEV DB
     """
-    
+
     dump_file = "./dump_"
     dump_file += date.today().strftime("%Y-%m-%d") + ".sql"
 
