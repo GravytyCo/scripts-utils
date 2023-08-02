@@ -10,18 +10,19 @@ def dump_prod_db():
     DEV DB
     """
 
-    dump_file = "./dump_"
-    dump_file += date.today().strftime("%Y-%m-%d") + ".sql"
+    dump_file_path = "/home/server/"
+    dump_file = "dump_" + date.today().strftime("%Y-%m-%d") + ".sql"
+    dump_file_path += dump_file
 
     #create a dump file in the current directory
     command1 = f"export PGPASSWORD='{SOURCE_DB_PASSWORD}';"
-    command2 = command1 + f"pg_dump -h {SOURCE_DB_HOST} -p {SOURCE_DB_PORT} -U {SOURCE_DB_USER} -f {dump_file} -d {SOURCE_DB_NAME}"
+    command2 = command1 + f"pg_dump -h {SOURCE_DB_HOST} -p {SOURCE_DB_PORT} -U {SOURCE_DB_USER} -f {dump_file_path} -d {SOURCE_DB_NAME}"
     os.system(command2)
     #upload the dump file into S3 bucket
-    command3 = f"aws s3 cp {dump_file} s3://gravyty/database_backup/{dump_file}"
+    command3 = f"aws s3 cp {dump_file_path} s3://gravyty/database_backup/{dump_file}"
     os.system(command3)
     #delete file from current directory
-    command4 = f"rm -f {dump_file}"
+    command4 = f"rm -f {dump_file_path}"
     os.system(command4)
 
 if __name__ == "__main__":
